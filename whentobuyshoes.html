@@ -15,7 +15,9 @@
       <a href="index.html">Home</a>
     </nav>
   </div>
-  <h4>Under construction</h4>
+  <h3>This simple calculator generates an estimate lifespan of your shoes depending on the number of steps you
+    take. General consensus is to replace shoes every 300-500 miles. The calculator leans towards 500 miles, but it
+    depends on the length of your stride</h3>
 
   <form id="timeEntry" onsubmit="return false;">
     <label for="timeEntry">
@@ -25,7 +27,7 @@
     </label>
   </form>
 
-  <h3 id="stepTotal"></h3>
+  <h2 id="stepTotal"></h2>
   <br />
   <br />
 
@@ -43,7 +45,9 @@
     steps = steps.replace(/\,/g, '');
     console.log(steps);
     result = 1000000 / steps;
-    document.getElementById('stepTotal').innerHTML = result + "  days";
+    let month = Math.floor(result / 30);
+    let day = result % 30;
+    document.getElementById('stepTotal').innerHTML = month + "  months  " + day.toFixed(0) + "  days";
     console.log(steps);
   }
 

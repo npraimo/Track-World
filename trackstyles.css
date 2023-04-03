@@ -13,6 +13,7 @@ html {
   padding-bottom: 2vh;
   font-family: Sans-Serif;
   text-align: center;
+  align-items: center;
   font-size: 10px;
   background-color: var(--base-color2);
   color: var(--base-color2);
@@ -41,6 +42,21 @@ h1 {
   text-decoration: underline;
   text-shadow: 5px 1px 2px var(--base-color5), 0 0 1em var(--base-color3),
     0 0 2px var(--base-color2);
+}
+
+h2 {
+  text-shadow: 5px 1px 2px var(--base-color5), 0 0 1em var(--base-color3),
+    0 0 2px var(--base-color2);
+  color: yellow;
+  outline: black;
+}
+
+h3 {
+  max-width: 60vw;
+  margin: auto;
+  padding: 0.5vw;
+  align-items: center;
+  text-align: center;
 }
 
 a {
