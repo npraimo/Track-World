@@ -26,13 +26,13 @@
         </select>
     </label>
     <br />
+    <br />
 
     <!-- default buttons for stopwatch -->
     <button type="button" id="startButton">Start</button>
     <button type="button" id="stopButton">Stop</button>
     <button type="button" id="lapButton">Lap</button>
     <br />
-
     <!-- Looking for target paces for a certain race... enter into text box, then hit distance you want to get a pace for -->
     <h2>Pace</h2>
     <form id="timeEntry" onsubmit="return false;">
@@ -42,12 +42,15 @@
         </label>
     </form>
     <br />
-    <button class="submitButton" type="button" id="twoPace">200m</button>
-    <button class="submitButton" type="button" id="fourPace">400m</button>
-    <button class="submitButton" type="button" id="eightPace">800m</button>
-    <button class="submitButton" type="button" id="twelvePace">1,200m</button>
-    <button class="submitButton" type="button" id="milePace">Mile</button>
-
+    <div id="buttons">
+        <button type="button" id="twoPace" value="200">200m</button>
+        <button type="button" id="fourPace" value="400">400m</button>
+        <button type="button" id="eightPace" value="800">800m</button>
+        <button type="button" id="twelvePace" value="1200">1,200m</button>
+        <button type="button" id="milePace" value="1600">Mile</button>
+        <button type="button" id="mileHalfPace" value="2400">1 1/2 Mile</button>
+        <button type="button" id="twoMilePace" value="3200">2 Mile</button>
+    </div>
     <!-- Output -->
     <h4>You should run <span id="paceEvent"></span> in <span id="expectedPace"></span></h4>
 </body>
@@ -55,26 +58,25 @@
 
 
 <script>
-    const submitButton = document.getElementsByClassName("submitButton");
-    const eventOption = document.getElementById("trackEvent");
+    const submitButton = document.getElementById("buttons");
     const paceEvent = document.getElementById("paceEvent");
-    const desiredTime = document.getElementById("desiredTime").value;
+    const eventOption = document.getElementById("trackEvent")
+
 
     submitButton.addEventListener('click', pacedTime)
 
-    submitButton.addEventListener("click", convertTime);
-
-    function pacedTime() {
-        console.log('hello');
+    function pacedTime(e) {
+        const desiredTime = document.getElementById("desiredTime").value;
+        const eventOptionValue = document.getElementById("trackEvent").value
+        console.log(desiredTime / eventOption.value);
+        console.log(e);
+        document.getElementById('expectedPace').innerHTML = desiredTime / eventOptionValue * 200;
     }
 
 
 
     // document.getElementById("expectedSplit").innerHTML = h + ":" + m + ":" + s;
     paceEvent.innerHTML = eventOption.value + "m";
-    document.getElementById('expectedPace').innerHTML = "200 minutes";
-
-
 
     // setting minutes and seconds for output
     let minute = Math.floor(desiredTime / 60)
