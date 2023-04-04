@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="trackstyles.css" rel="stylesheet" />
+    <title>Pace calculator</title>
+</head>
+
+<body>
+    <div class="nav-bar">
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </div>
+    <label for="trackEvent">
+        Choose an event:
+        <br />
+        <select id="trackEvent">
+            <option value="800">800m</option>
+            <option value="1600">Mile</option>
+            <option value="3200">Two Mile</option>
+            <option value="5000">5k</option>
+        </select>
+    </label>
+    <br />
+
+    <!-- default buttons for stopwatch -->
+    <button type="button" id="startButton">Start</button>
+    <button type="button" id="stopButton">Stop</button>
+    <button type="button" id="lapButton">Lap</button>
+    <br />
+
+    <!-- Active running splits, hit button to see projected pace -->
+    <h2>Splits</h2>
+    <button type="button" id="twoSplit" value="200">200m</button>
+    <button type="button" id="fourSplit" valye="400">400m</button>
+    <button type="button" id="eightSplit" value="800">800m</button>
+    <button type="button" id="twelveSplit" value="1200">1,200m</button>
+    <br>
+    <br>
+    <button type="button" id="mileSplit" value="1600">1 Mile</button>
+    <button type="button" id="mileSplit" value="2400">1 1/2 Mile</button>
+    <button type="button" id="mileSplit" value="3200">2 Mile</button>
+    <button type="button" id="mileSplit" value="3200">2 1/2 Mile</button>
+
+    <!-- Output -->
+    <h4>You are on pace to run <span id="splitEvent"></span> in <span id="expectedSplit"></span></h4>
+    <br />
+    <br />
+</body>
+
+
+
+<script>
+    const submitButton = document.getElementById("");
+    const eventOption = document.getElementById("trackEvent");
+    const splitEvent = document.getElementById("splitEvent");
+
+    splitEvent.innerHTML = "500 minutes";
+    document.getElementById("expectedSplit").innerHTML = eventOption.value + "m";
+
+
+
+    // setting minutes and seconds for output
+    let minute = Math.floor(desiredTime / 60)
+    let second = (desiredTime % 60).toFixed(2);
+    second = checkTime(second);
+
+    // add zero in front of numbers < 10
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+</script>
+
+</html>

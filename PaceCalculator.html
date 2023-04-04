@@ -22,6 +22,7 @@
             <option value="800">800m</option>
             <option value="1600">Mile</option>
             <option value="3200">Two Mile</option>
+            <option value="5000">5k</option>
         </select>
     </label>
     <br />
@@ -30,19 +31,6 @@
     <button type="button" id="startButton">Start</button>
     <button type="button" id="stopButton">Stop</button>
     <button type="button" id="lapButton">Lap</button>
-    <br />
-
-    <!-- Active running splits, hit button to see projected pace -->
-    <h2>Splits</h2>
-    <button type="button" id="twoSplit">200m</button>
-    <button type="button" id="fourSplit">400m</button>
-    <button type="button" id="eightSplit">800m</button>
-    <button type="button" id="twelveSplit">1,200m</button>
-    <button type="button" id="mileSplit">Mile</button>
-
-    <!-- Output -->
-    <h4>You are on pace to run <span class="splitEvent"></span> in <span id="expectedSplit"></span></h4>
-    <br />
     <br />
 
     <!-- Looking for target paces for a certain race... enter into text box, then hit distance you want to get a pace for -->
@@ -54,36 +42,43 @@
         </label>
     </form>
     <br />
-    <button type="button" id="twoPace">200m</button>
-    <button type="button" id="fourPace">400m</button>
-    <button type="button" id="eightPace">800m</button>
-    <button type="button" id="twelvePace">1,200m</button>
-    <button type="button" id="milePace">Mile</button>
+    <button class="submitButton" type="button" id="twoPace">200m</button>
+    <button class="submitButton" type="button" id="fourPace">400m</button>
+    <button class="submitButton" type="button" id="eightPace">800m</button>
+    <button class="submitButton" type="button" id="twelvePace">1,200m</button>
+    <button class="submitButton" type="button" id="milePace">Mile</button>
 
     <!-- Output -->
-    <h4>You should run <span name="paceEvent"></span> in <span id="expectedSplit"></span></h4>
+    <h4>You should run <span id="paceEvent"></span> in <span id="expectedPace"></span></h4>
 </body>
 
 
 
 <script>
-    const submitButton = document.getElementById("");
+    const submitButton = document.getElementsByClassName("submitButton");
     const eventOption = document.getElementById("trackEvent");
     const paceEvent = document.getElementById("paceEvent");
-    const splitEvent = document.getElementById("splitEvent");
     const desiredTime = document.getElementById("desiredTime").value;
 
-    console.log(desiredTime);
+    submitButton.addEventListener('click', pacedTime)
+
+    submitButton.addEventListener("click", convertTime);
+
+    function pacedTime() {
+        console.log('hello');
+    }
 
 
 
     // document.getElementById("expectedSplit").innerHTML = h + ":" + m + ":" + s;
-    document.getElementById("expectedSplit").innerHTML = eventOption.value + "m";
+    paceEvent.innerHTML = eventOption.value + "m";
+    document.getElementById('expectedPace').innerHTML = "200 minutes";
+
 
 
     // setting minutes and seconds for output
-    let minute = Math.floor(convertedTime / 60)
-    let second = (convertedTime % 60).toFixed(2);
+    let minute = Math.floor(desiredTime / 60)
+    let second = (desiredTime % 60).toFixed(2);
     second = checkTime(second);
 
     // add zero in front of numbers < 10
