@@ -47,12 +47,16 @@
         <button type="button" id="fourPace" value="400">400m</button>
         <button type="button" id="eightPace" value="800">800m</button>
         <button type="button" id="twelvePace" value="1200">1,200m</button>
+        <br />
+        <br />
         <button type="button" id="milePace" value="1600">Mile</button>
         <button type="button" id="mileHalfPace" value="2400">1 1/2 Mile</button>
         <button type="button" id="twoMilePace" value="3200">2 Mile</button>
     </div>
+    <br />
     <!-- Output -->
-    <h4>You should run <span id="paceEvent"></span> in <span id="expectedPace"></span></h4>
+    <h3>You should run <span id="paceEvent"></span> in <span id="expectedPace"></span></h3>
+    <br />
 </body>
 
 
@@ -62,15 +66,26 @@
     const paceEvent = document.getElementById("paceEvent");
     const eventOption = document.getElementById("trackEvent")
 
-
     submitButton.addEventListener('click', pacedTime)
+    eventOption.addEventListener('change', updateEvent)
 
     function pacedTime(e) {
-        const desiredTime = document.getElementById("desiredTime").value;
-        const eventOptionValue = document.getElementById("trackEvent").value
-        console.log(desiredTime / eventOption.value);
-        console.log(e);
-        document.getElementById('expectedPace').innerHTML = desiredTime / eventOptionValue * 200;
+        let desiredTime = document.getElementById("desiredTime").value;
+        let eventOptionValue = document.getElementById("trackEvent").value
+
+        if (desiredTime.includes(":")) {
+            desiredTime = desiredTime.split(":");
+            desiredTime[0] = desiredTime[0] * 60;
+            desiredTime[1] = desiredTime[1] * 1;
+            desiredTime = desiredTime.reduce((a, b) => a + b);
+        };
+        document.getElementById('expectedPace').innerHTML = desiredTime / eventOptionValue * e.srcElement.value;
+
+
+    }
+
+    function updateEvent() {
+        paceEvent.innerHTML = eventOption.value + "m";
     }
 
 
