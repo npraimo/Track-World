@@ -15,28 +15,33 @@
             <a href="index.html">Home</a>
         </nav>
     </div>
-    <label for="trackEvent">
-        Choose an event:
-        <br />
-        <select id="trackEvent">
-            <option value="800">800m</option>
-            <option value="1600">Mile</option>
-            <option value="3200">Two Mile</option>
-            <option value="5000">5k</option>
-        </select>
-    </label>
+    <div>
+        <label for="trackEvent">
+            Choose an event:
+            <br />
+            <select id="trackEvent">
+                <option value="800">800m</option>
+                <option value="1600">Mile</option>
+                <option value="3200">Two Mile</option>
+                <option value="5000">5k</option>
+            </select>
+        </label>
+    </div>
     <br />
 
-    <!-- default buttons for stopwatch -->
-    <button type="button" id="startButton">Start</button>
-    <button type="button" id="stopButton">Stop</button>
-    <button type="button" id="lapButton">Lap</button>
+    <div class="wrapper">
+        <p><span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tens">00</span></p>
+        <button id="button-start">Start</button>
+        <button id="button-stop">Stop</button>
+        <button id="button-reset">Reset</button>
+    </div>
+
     <br />
 
     <!-- Active running splits, hit button to see projected pace -->
     <h2>Splits</h2>
     <button type="button" id="twoSplit" value="200">200m</button>
-    <button type="button" id="fourSplit" valye="400">400m</button>
+    <button type="button" id="fourSplit" value="400">400m</button>
     <button type="button" id="eightSplit" value="800">800m</button>
     <button type="button" id="twelveSplit" value="1200">1,200m</button>
     <br>
@@ -55,6 +60,77 @@
 
 
 <script>
+    window.onload = function () {
+        var seconds = 00;
+        var tens = 00;
+        var minutes = 00;
+        var appendTens = document.getElementById("tens");
+        var appendSeconds = document.getElementById("seconds");
+        var appendMinutes = document.getElementById("minutes");
+        var buttonStart = document.getElementById('button-start');
+        var buttonStop = document.getElementById('button-stop');
+        var buttonReset = document.getElementById('button-reset');
+        var Interval;
+
+        buttonStart.onclick = function () {
+            clearInterval(Interval);
+            Interval = setInterval(startTimer, 10);
+        }
+
+        buttonStop.onclick = function () {
+            clearInterval(Interval);
+        }
+
+
+        buttonReset.onclick = function () {
+            clearInterval(Interval);
+            tens = "00";
+            seconds = "00";
+            minutes = "00";
+            appendTens.innerHTML = tens;
+            appendSeconds.innerHTML = seconds;
+            appendMinutes.innerHTML = minutes;
+        }
+
+
+
+        function startTimer() {
+            tens++;
+
+            if (tens <= 9) {
+                appendTens.innerHTML = "0" + tens;
+            }
+
+            if (tens > 9) {
+                appendTens.innerHTML = tens;
+
+            }
+
+            if (tens > 99) {
+                console.log("seconds");
+                seconds++;
+                appendSeconds.innerHTML = "0" + seconds;
+                tens = 0;
+                appendTens.innerHTML = "0" + 0;
+            }
+
+            if (seconds > 9) {
+                appendSeconds.innerHTML = seconds;
+            }
+
+            if (seconds > 60) {
+                minutes++;
+                appendMinutes.innerHTML = "0" + minutes;
+                seconds = 0;
+                appendSeconds.innerHTML = "0" + 0;
+            }
+        }
+    }
+
+
+    //need to capture time from stopwatch then apply that time to the race distance... 
+    //breaking down to meters per second then multiplying to get seconds of corresponding distance selected.
+
     const submitButton = document.getElementById("");
     const eventOption = document.getElementById("trackEvent");
     const splitEvent = document.getElementById("splitEvent");
@@ -63,11 +139,6 @@
     document.getElementById("expectedSplit").innerHTML = eventOption.value + "m";
 
 
-
-    // setting minutes and seconds for output
-    let minute = Math.floor(desiredTime / 60)
-    let second = (desiredTime % 60).toFixed(2);
-    second = checkTime(second);
 
     // add zero in front of numbers < 10
     function checkTime(i) {
