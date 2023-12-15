@@ -67,9 +67,9 @@
     const eventOption = document.getElementById("trackEvent")
 
     submitButton.addEventListener('click', pacedTime)
-    eventOption.addEventListener('change', updateEvent)
 
     function pacedTime(e) {
+
         let desiredTime = document.getElementById("desiredTime").value;
         let eventOptionValue = document.getElementById("trackEvent").value
 
@@ -79,24 +79,25 @@
             desiredTime[1] = desiredTime[1] * 1;
             desiredTime = desiredTime.reduce((a, b) => a + b);
         };
-        document.getElementById('expectedPace').innerHTML = desiredTime / eventOptionValue * e.srcElement.value;
+        // if (desiredTime > 60) {
+        //     let minute = Math.floor(desiredTime / 60)
+        //     let second = (desiredTime % 60).toFixed(2);
+        //     second = checkTime(second);
+        //     minute = checkTime(minute);
+        // }
+        paceEvent.innerHTML = e.srcElement.value + "m";
 
+        var finalTime = desiredTime / eventOptionValue * e.srcElement.value;
+        let minute = Math.floor(finalTime / 60)
+        let second = (finalTime % 60).toFixed(2);
+        second = checkTime(second);
+        minute = checkTime(minute);
 
+        document.getElementById('expectedPace').innerHTML = minute + ":" + second;
     }
-
-    function updateEvent() {
-        paceEvent.innerHTML = eventOption.value + "m";
-    }
-
-
-
-    // document.getElementById("expectedSplit").innerHTML = h + ":" + m + ":" + s;
-    paceEvent.innerHTML = eventOption.value + "m";
 
     // setting minutes and seconds for output
-    let minute = Math.floor(desiredTime / 60)
-    let second = (desiredTime % 60).toFixed(2);
-    second = checkTime(second);
+
 
     // add zero in front of numbers < 10
     function checkTime(i) {
